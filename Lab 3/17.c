@@ -1,3 +1,4 @@
+//Write a program to calculate sum of numbers from m to n
 #include<stdio.h>
 void main(){
     int starting_Number, ending_Number;
