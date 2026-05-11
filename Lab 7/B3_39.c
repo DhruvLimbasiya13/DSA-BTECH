@@ -1,42 +1,67 @@
 #include <stdio.h>
 
-int main() {
-    int n;
-    scanf("%d", &n);
-    
-    int arr[n][2];
-    
-    for (int i = 0; i < n; i++) {
-        scanf("%d %d", &arr[i][0], &arr[i][1]);
+void main() {
+
+    int number_of_Intervals;
+
+    printf("Enter the number of intervals: ");
+    scanf("%d", &number_of_Intervals);
+
+    int intervals[number_of_Intervals][2];
+
+    for(int i = 0; i < number_of_Intervals; i++) {
+        printf("Enter the start and end of interval %d: ", i + 1);
+        scanf("%d %d", &intervals[i][0], &intervals[i][1]);
     }
-    
-    // Sort by start time
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - 1 - i; j++) {
-            if (arr[j][0] > arr[j + 1][0]) {
-                int t1 = arr[j][0], t2 = arr[j][1];
-                arr[j][0] = arr[j + 1][0];
-                arr[j][1] = arr[j + 1][1];
-                arr[j + 1][0] = t1;
-                arr[j + 1][1] = t2;
+
+    // SORTING
+    for(int i = 0; i < number_of_Intervals - 1; i++) {
+        for(int j = 0; j < number_of_Intervals - i - 1; j++) {
+
+            if(intervals[j][0] > intervals[j + 1][0]) {
+
+                int temp1 = intervals[j][0];
+                int temp2 = intervals[j][1];
+
+                intervals[j][0] = intervals[j + 1][0];
+                intervals[j][1] = intervals[j + 1][1];
+
+                intervals[j + 1][0] = temp1;
+                intervals[j + 1][1] = temp2;
             }
         }
     }
-    
-    // Merge overlapping intervals
-    printf("{%d, %d}", arr[0][0], arr[0][1]);
-    int end = arr[0][1];
-    
-    for (int i = 1; i < n; i++) {
-        if (arr[i][0] <= end) {
-            if (arr[i][1] > end)
-                end = arr[i][1];
-        } else {
-            printf(", {%d, %d}", arr[i][0], arr[i][1]);
-            end = arr[i][1];
+
+    printf("Intervals before merging:\n");
+
+    for(int i = 0; i < number_of_Intervals; i++) {
+        printf("[%d, %d]\n", intervals[i][0], intervals[i][1]);
+    }
+
+    // MERGING
+    for(int i = 0; i < number_of_Intervals - 1; i++) {
+
+        if(intervals[i][1] >= intervals[i + 1][0]) {
+
+            // keep maximum ending value
+            if(intervals[i + 1][1] > intervals[i][1]) {
+                intervals[i][1] = intervals[i + 1][1];
+            }
+
+            // shift left
+            for(int j = i + 1; j < number_of_Intervals - 1; j++) {
+                intervals[j][0] = intervals[j + 1][0];
+                intervals[j][1] = intervals[j + 1][1];
+            }
+
+            number_of_Intervals--;
+            i--;
         }
     }
-    
-    printf("\n");
-    return 0;
+
+    printf("Intervals after merging:\n");
+
+    for(int i = 0; i < number_of_Intervals; i++) {
+        printf("[%d, %d]\n", intervals[i][0], intervals[i][1]);
+    }
 }
