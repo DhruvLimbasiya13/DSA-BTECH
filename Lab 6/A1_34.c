@@ -72,13 +72,11 @@ void main()
             printf("\nenter value of element %d = ", top + 1);
             scanf("%d", &value);
             push(value);
-            display();
             break;
 
         case 2:
 
             pop();
-            display();
             break;
 
         case 3:
@@ -88,7 +86,6 @@ void main()
             printf("\nenter value of element you want to change = ");
             scanf("%d", &value);
             change(index, value);
-            display();
             break;
 
         case 4:
