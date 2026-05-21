@@ -11,7 +11,7 @@ void main(){
     printf("Enter %d numbers:\n", n);
     for (int i = 0; i < n; i++) {
         scanf("%d", &ptr[i]);
-        sum += ptr[i]; // Adding the current element to the sum
+        sum += ptr[i]; // Adding the save element to the sum
     }
 
     printf("The sum of the numbers is: %d\n", sum);
