@@ -52,7 +52,7 @@ void insert_end(struct Node** first , int info){
 void delete_first(struct Node** first){
     if (*first == NULL)
     {
-        printf("Linked list is empty\n");
+        printf("linked list is empty\n");
         return;
     }
 
@@ -64,7 +64,7 @@ void delete_first(struct Node** first){
 void delete_last(struct Node** first){
     if (*first == NULL)
     {
-        printf("Linked list is empty\n");
+        printf("linked list is empty\n");
         return;
     }
 
@@ -89,7 +89,7 @@ void delete_last(struct Node** first){
 void delete_from_position(struct Node** first, int position){
     if (*first == NULL)
     {
-        printf("Linked list is empty\n");
+        printf("linked list is empty\n");
         return;
     }
 
@@ -120,7 +120,7 @@ void delete_from_position(struct Node** first, int position){
 void display_Nodes(struct Node** first){
     if (*first == NULL)
     {
-        printf("Linked list is empty\n");
+        printf("linked list is empty\n");
         return;
     }
 

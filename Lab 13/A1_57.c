@@ -37,7 +37,7 @@ void display(struct Node** first)
 
     if (*first == NULL)
     {
-        printf("Linked list is empty\n");
+        printf("linked list is empty\n");
         return;
     }
 
