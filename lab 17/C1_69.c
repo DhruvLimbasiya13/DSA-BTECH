@@ -1,5 +1,3 @@
-// Write a program to swap two consecutive nodes in the linked list. Don’t change
-// the values of nodes, implement by changing the link of the nodes.
 #include <stdio.h>
 #include <stdlib.h>
 struct Node
