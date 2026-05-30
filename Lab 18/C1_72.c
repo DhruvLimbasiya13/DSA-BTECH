@@ -8,18 +8,36 @@ struct Node{
     struct Node *link;
 };
 
-void insert(struct Node **first , int coeff , int exp){
+void insert(struct Node **first, int coeff, int exp)
+{
+    struct Node *temp = *first;
+
+    // Check if exponent already exists
+    while(temp != NULL)
+    {
+        if(temp->exp == exp)
+        {
+            temp->coeff += coeff;  // Add coefficients
+            return;
+        }
+        temp = temp->link;
+    }
+
+    // Create new node if exponent not found
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
     newNode->coeff = coeff;
     newNode->exp = exp;
     newNode->link = NULL;
 
-    if(*first == NULL){
+    if(*first == NULL)
+    {
         *first = newNode;
     }
-    else{
-        struct Node *temp = *first;
-        while(temp->link != NULL){
+    else
+    {
+        temp = *first;
+        while(temp->link != NULL)
+        {
             temp = temp->link;
         }
         temp->link = newNode;
