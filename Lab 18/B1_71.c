@@ -91,8 +91,7 @@ void deleteNode(struct Node **front, struct Node **rear, int data)
     printf("Node deleted successfully\n");
 }
 
-void splitLists(struct Node **front1, struct Node **rear1,
-                struct Node **front2, struct Node **rear2)
+void splitLists(struct Node **front1, struct Node **rear1,struct Node **front2, struct Node **rear2)
 {
     if (*front1 == NULL)
     {
@@ -104,13 +103,11 @@ void splitLists(struct Node **front1, struct Node **rear1,
     struct Node *fast = *front1;
 
     // Find middle using slow and fast pointer
-    while (fast->link != *front1 &&
-           fast->link->link != *front1)
+    while (fast->link != *front1 && fast->link->link != *front1)
     {
         slow = slow->link;
         fast = fast->link->link;
     }
-
     // For even number of nodes
     if (fast->link->link == *front1)
     {
