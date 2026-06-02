@@ -7,7 +7,7 @@ void main(){
     printf("Enter the total number of elements in the array: ");
     scanf("%d", &total_elements);
 
-    int arr[total_elements];
+    int arr[total_elements+1];
 
     for (int i = 0; i < total_elements; i++) {
         printf("Enter element %d: ", i + 1);
