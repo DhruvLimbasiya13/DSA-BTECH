@@ -52,7 +52,6 @@ void deleteSong()
         printf("Playlist is empty.\n");
         return;
     } // if
-
     char title[100];
     printf("Enter title of the song to delete: ");
     scanf(" %[^\n]", title);

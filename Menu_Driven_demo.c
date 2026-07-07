@@ -2,12 +2,6 @@
 #include<stdlib.h>
 void main()
 {
-    int total_elements;
-    printf("Enter the total number of elements in the queue: ");
-    scanf("%d", &total_elements);
-    
-    int double_queue[total_elements];
-    int front = -1, rear = -1;
 
     int choice;
     while(1){
