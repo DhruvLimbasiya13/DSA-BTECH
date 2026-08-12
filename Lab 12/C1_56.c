@@ -6,7 +6,7 @@ struct Song
 {
     char title[100];
     int duration;
-    struct Song *prev, *next;
+    struct Song *prev, *link;
 };
 
 void addSong(struct Song **first, struct Song **last, struct Song **current)
@@ -24,7 +24,7 @@ void addSong(struct Song **first, struct Song **last, struct Song **current)
 
     strcpy(newSong->title, title);
     newSong->duration = duration;
-    newSong->next = NULL;
+    newSong->link = NULL;
     newSong->prev = NULL;
 
     if (*first == NULL)
@@ -33,7 +33,7 @@ void addSong(struct Song **first, struct Song **last, struct Song **current)
     }
     else
     {
-        (*last)->next = newSong;
+        (*last)->link = newSong;
         newSong->prev = *last;
         *last = newSong;
     }
@@ -61,19 +61,19 @@ void deleteSong(struct Song **first, struct Song **last, struct Song **current)
         if (strcmp(save->title, title) == 0)
         {
             if (save == *first)
-                *first = save->next;
+                *first = save->link;
 
             if (save == *last)
                 *last = save->prev;
 
             if (save->prev)
-                save->prev->next = save->next;
+                save->prev->link = save->link;
 
-            if (save->next)
-                save->next->prev = save->prev;
+            if (save->link)
+                save->link->prev = save->prev;
 
             if (*current == save)
-                *current = (save->next) ? save->next : save->prev;
+                *current = (save->link) ? save->link : save->prev;
 
             free(save);
 
@@ -81,7 +81,7 @@ void deleteSong(struct Song **first, struct Song **last, struct Song **current)
             return;
         }
 
-        save = save->next;
+        save = save->link;
     }
 
     printf("Song not found.\n");
@@ -100,14 +100,14 @@ void playCurrent(struct Song *current)
 
 void playNext(struct Song **current)
 {
-    if (*current && (*current)->next)
+    if (*current && (*current)->link)
     {
-        *current = (*current)->next;
+        *current = (*current)->link;
         playCurrent(*current);
     }
     else
     {
-        printf("No next song in the playlist.\n");
+        printf("No link song in the playlist.\n");
     }
 }
 
@@ -146,7 +146,7 @@ void displayPlaylist(struct Song *first, struct Song *current)
 
         printf("\n");
 
-        save = save->next;
+        save = save->link;
     }
 }
 
@@ -164,7 +164,7 @@ void main()
         printf("1. Add Song\n");
         printf("2. Delete Song\n");
         printf("3. Play Current Song\n");
-        printf("4. Play Next Song\n");
+        printf("4. Play link Song\n");
         printf("5. Play Previous Song\n");
         printf("6. Display Playlist\n");
         printf("7. Exit\n");

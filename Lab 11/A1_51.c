@@ -3,7 +3,7 @@
 
 struct Node
 {
-    int data;
+    int info;
     struct Node *link;
 };
 
@@ -11,7 +11,7 @@ struct Node
 void insertFront(struct Node **first, int value)
 {
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
-    newNode->data = value;
+    newNode->info = value;
 
     if (*first == NULL)
     {
@@ -39,7 +39,7 @@ void insertFront(struct Node **first, int value)
 void insertEnd(struct Node **first, int value)
 {
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
-    newNode->data = value;
+    newNode->info = value;
 
     if (*first == NULL)
     {
@@ -137,7 +137,7 @@ void display(struct Node *first)
 
     do
     {
-        printf("%d -> ", temp->data);
+        printf("%d -> ", temp->info);
         temp = temp->link;
     }
     while (temp != first);

@@ -6,7 +6,7 @@ struct Song
 {
     char title[100];
     int duration;
-    struct Song *prev, *next;
+    struct Song *prev, *link;
 };
 
 struct Song *first = NULL, *last = NULL, *current = NULL;
@@ -24,7 +24,7 @@ void addSong()
     struct Song *newSong = (struct Song *)malloc(sizeof(struct Song));
     strcpy(newSong->title, title);
     newSong->duration = duration;
-    newSong->next = newSong->prev = NULL;
+    newSong->link = newSong->prev = NULL;
 
     if (first == NULL)
     {
@@ -32,7 +32,7 @@ void addSong()
     }//if
     else
     {
-        last->next = newSong;
+        last->link = newSong;
         newSong->prev = last;
         last = newSong;
 
@@ -63,7 +63,7 @@ void deleteSong()
         {
             if (save == first)
             {
-                first = save->next;
+                first = save->link;
             } // if
             if (save == last)
             {
@@ -71,23 +71,23 @@ void deleteSong()
             } // if
             if (save->prev)
             {
-                save->prev->next = save->next;
+                save->prev->link = save->link;
             } // if
-            if (save->next)
+            if (save->link)
             {
-                save->next->prev = save->prev;
+                save->link->prev = save->prev;
             } // if
 
             if (current == save)
             {
-                current = save->next ? save->next : save->prev;
+                current = save->link ? save->link : save->prev;
             } // if
 
             free(save);
             printf("Song deleted.\n");
             return;
         } // if
-        save = save->next;
+        save = save->link;
     } // while
 
     printf("Song not found.\n");
@@ -104,18 +104,18 @@ void playCurrent()
     printf("Now Playing: \"%s\" [%d sec]\n", current->title, current->duration);
 } // play current
 
-void playNext()
+void playlink()
 {
-    if (current && current->next)
+    if (current && current->link)
     {
-        current = current->next;
+        current = current->link;
         playCurrent();
     } // if
     else
     {
-        printf("No next song in the playlist.\n");
+        printf("No link song in the playlist.\n");
     } // else
-} // play next
+} // play link
 
 void playPrevious()
 {
@@ -146,7 +146,7 @@ void displayPlaylist()
     {
         char *label = (save == current) ? "  <-- current" : "";
         printf("%d. \"%s\" [%d sec]%s\n", index++, save->title, save->duration, label);
-        save = save->next;
+        save = save->link;
     } // while
 } // display
 
@@ -160,7 +160,7 @@ void main()
         printf("1. Add Song\n");
         printf("2. Delete Song\n");
         printf("3. Play Current Song\n");
-        printf("4. Play Next Song\n");
+        printf("4. Play link Song\n");
         printf("5. Play Previous Song\n");
         printf("6. Display Playlist\n");
         printf("7. Exit\n");
@@ -179,7 +179,7 @@ void main()
             playCurrent();
             break;
         case 4:
-            playNext();
+            playlink();
             break;
         case 5:
             playPrevious();

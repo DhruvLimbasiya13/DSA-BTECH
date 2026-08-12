@@ -3,11 +3,11 @@
 
 struct Node
 {
-    int data;
-    struct Node *next;
+    int info;
+    struct Node *link;
 };
 
-void insertAtEnd(struct Node **first, int data)
+void insertAtEnd(struct Node **first, int info)
 {
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
     if (newNode == NULL)
@@ -16,8 +16,8 @@ void insertAtEnd(struct Node **first, int data)
         return;
     }
 
-    newNode->data = data;
-    newNode->next = NULL;
+    newNode->info = info;
+    newNode->link = NULL;
 
     if (*first == NULL)
     {
@@ -26,30 +26,30 @@ void insertAtEnd(struct Node **first, int data)
     else
     {
         struct Node *temp = *first;
-        while (temp->next != NULL)
+        while (temp->link != NULL)
         {
-            temp = temp->next;
+            temp = temp->link;
         }
-        temp->next = newNode;
+        temp->link = newNode;
     }
 }
 
-void deleteNode(struct Node **first, int data)
+void deleteNode(struct Node **first, int info)
 {
     struct Node *temp = *first;
     struct Node *prev = NULL;
 
     while (temp != NULL)
     {
-        if (temp->data == data)
+        if (temp->info == info)
         {
             if (prev == NULL)
             {
-                *first = temp->next;
+                *first = temp->link;
             }
             else
             {
-                prev->next = temp->next;
+                prev->link = temp->link;
             }
 
             free(temp);
@@ -58,10 +58,10 @@ void deleteNode(struct Node **first, int data)
         }
 
         prev = temp;
-        temp = temp->next;
+        temp = temp->link;
     }
 
-    printf("Data not found\n");
+    printf("info not found\n");
 }
 
 void display(struct Node *first)
@@ -75,8 +75,8 @@ void display(struct Node *first)
     struct Node *temp = first;
     while (temp != NULL)
     {
-        printf("%d -> ", temp->data);
-        temp = temp->next;
+        printf("%d -> ", temp->info);
+        temp = temp->link;
     }
     printf("NULL\n");
 }
@@ -89,7 +89,7 @@ int countNodes(struct Node *first)
     while (temp != NULL)
     {
         count++;
-        temp = temp->next;
+        temp = temp->link;
     }
 
     return count;
@@ -112,33 +112,33 @@ void bubbleSort(struct Node **first)
 
         for (int j = 0; j < n - i - 1; j++)
         {
-            struct Node *next = curr->next;
+            struct Node *link = curr->link;
 
-            if (next != NULL && curr->data > next->data)
+            if (link != NULL && curr->info > link->info)
             {
                 if (prev == NULL)
                 {
-                    *first = next;
+                    *first = link;
                 }
                 else
                 {
-                    prev->next = next;
+                    prev->link = link;
                 }
 
-                curr->next = next->next;
-                next->next = curr;
+                curr->link = link->link;
+                link->link = curr;
 
-                prev = next;
+                prev = link;
             }
             else
             {
                 prev = curr;
-                curr = curr->next;
+                curr = curr->link;
             }
 
-            if (prev != next)
+            if (prev != link)
             {
-                curr = prev->next;
+                curr = prev->link;
             }
         }
     }
@@ -149,7 +149,7 @@ void bubbleSort(struct Node **first)
 int main(void)
 {
     int choice;
-    int data;
+    int info;
     struct Node *first = NULL;
 
     while (1)
@@ -161,14 +161,14 @@ int main(void)
         switch (choice)
         {
         case 1:
-            printf("Enter the data to be inserted: ");
-            scanf("%d", &data);
-            insertAtEnd(&first, data);
+            printf("Enter the info to be inserted: ");
+            scanf("%d", &info);
+            insertAtEnd(&first, info);
             break;
         case 2:
-            printf("Enter the data to be deleted: ");
-            scanf("%d", &data);
-            deleteNode(&first, data);
+            printf("Enter the info to be deleted: ");
+            scanf("%d", &info);
+            deleteNode(&first, info);
             break;
         case 3:
             bubbleSort(&first);
