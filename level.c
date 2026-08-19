@@ -26,6 +26,7 @@ void setLevels(struct node *root, int count) {
     setLevels(root->right, count + 1);
 }
 
+//for binary tree
 int get_level(struct node *root, int data) {
     if (root == NULL) {
         return -1; // Data not found
@@ -38,6 +39,21 @@ int get_level(struct node *root, int data) {
         return leftLevel;
     }
     return get_level(root->right, data);
+}
+
+//for binary search tree
+int get_level_bst(struct node *root, int data) {
+    if (root == NULL) {
+        return -1; // Data not found
+    }
+    if (root->info == data) {
+        return root->level;
+    }
+    if (data < root->info) {
+        return get_level_bst(root->left, data);
+    } else {
+        return get_level_bst(root->right, data);
+    }
 }
 
 void main(){
