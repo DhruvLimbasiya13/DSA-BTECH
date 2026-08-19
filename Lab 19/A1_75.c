@@ -85,9 +85,9 @@ struct node *delete_node(int info, struct node *root)
             return root;
 
             //as per sir's method
-            // struct node *temp1 = find_min(root->right);
-            // struct node *temp2 = root->right;
-            // temp1->left = root->left;
+            // struct node *temp1 = find_min(root->right); 24
+            // struct node *temp2 = root->right; 27
+            // temp1->left = root->left;  24->left = 13
 
             // free(root);
             // return temp2;
