@@ -65,6 +65,11 @@ struct node *delete_node(int info, struct node *root)
     }
     else
     {
+        if(root->left == NULL && root->right == NULL)
+        {
+            free(root);
+            return NULL;
+        }
         if (root->left == NULL)
         {
             struct node *temp = root->right;
@@ -80,13 +85,19 @@ struct node *delete_node(int info, struct node *root)
         else
         {
             struct node *temp = find_min(root->right);
+
+            //struct node *temp = root->right;
+            // while (temp->left != NULL)
+            // {
+            //     temp = temp->left;
+            // }
             root->info = temp->info;
             root->right = delete_node(temp->info, root->right);
             return root;
 
             //as per sir's method
             // struct node *temp1 = find_min(root->right); 24
-            // struct node *temp2 = root->right; 27
+            // struct node *temp2 = root->right; 29
             // temp1->left = root->left;  24->left = 13
 
             // free(root);
